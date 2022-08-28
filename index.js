@@ -1,23 +1,25 @@
 // Add your code here
-// Add your code here
+// This is a sample function that returns a promise
 function submitData(name, email) {
-	let users = {
-		name: name,
-		email: email,
-	};
 	return fetch("http://localhost:3000/users", {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
 			Accept: "application/json",
 		},
-		body: JSON.stringify(users),
+		body: JSON.stringify({
+			name,
+			email,
+		}),
 	})
-		.then((response) => response.json())
-		.then((fetchedobject) => {
-			document.body.innerHTML = fetchedobject["id"];
+		.then(function (response) {
+			return response.json();
 		})
-		.catch((error) => {
+		.then(function (object) {
+			document.body.innerHTML = object["id"];
+		})
+		.catch(function (error) {
 			document.body.innerHTML = error.message;
 		});
 }
+// submitData();
